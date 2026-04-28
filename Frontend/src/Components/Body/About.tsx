@@ -13,7 +13,7 @@ const About = () => {
         <div className="absolute inset-0 bg-linear-to-br from-accent/5 via-transparent to-quad" />
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-6 md:px-8 lg:px-12 w-full ">
+      <div className="relative max-w-6xl mx-auto px-4 md:px-8 lg:px-12 w-full ">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center ">
 
           {/* Left: Text Content – staggered fade-in like hero */}
@@ -36,7 +36,7 @@ const About = () => {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.7 }}
               className="text-xl md:text-2xl text-amber-50/90 leading-relaxed">
-              Hello! I'm <span className="text-black text-3xl font-semibold"><b>Amar Tuladhar</b></span>,
+              Hello! I'm <span className="text-black text-2xl font-semibold"><b>Amar Tuladhar</b></span>,
               a passionate Full Stack Developer from Kathmandu who loves building clean,
               scalable, and user-focused web applications.
             </motion.p>
