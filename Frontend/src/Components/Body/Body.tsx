@@ -37,7 +37,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.7 }}
-              className="text-3xl md:text-5xl lg:text-7xl font-bold text-accent pr-3  mx-auto">
+              className="text-3xl md:text-5xl lg:text-7xl font-bold text-accent pr-3  ">
               I build things for the web.
             </motion.h2>
 
