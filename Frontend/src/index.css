@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Bpmf+Huninn&display=swap');
+@import "tailwindcss";
+
+
+@theme { 
+
+
+  --color-primary: #005b96;
+  --color-accent: #b3cde0;
+  --color-secondary: #011f4b;
+  --color-tertiary: #03396c;
+  --color-quad: #6497b1;
+
+  --font-display: "Bpmf Huninn", sans-serif;
+}
+
+@layer base { /* ✅ base styles */
+  body, Link {
+    @apply bg-amber-50 ;
+  }
+}
+
+body{
+  cursor:url('../src/assets/Cursor.png.png')
+}
