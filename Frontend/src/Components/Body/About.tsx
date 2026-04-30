@@ -85,7 +85,7 @@ const About = () => {
               transition={{ delay: 0.9, duration: 0.6 }}
               className="pt-4">
 
-              <Link to="/contact" className="inline-flex items-center px-7 py-4 rounded-lg border-2 border-accent text-accent font-mono font-bold text-lg hover:bg-accent/10 hover:shadow-lg hover:shadow-accent/20 transition-all duration-300 transform hover:-translate-y-1">
+              <Link to="/contact" className="inline-flex items-center px-5 py-4 rounded-lg border-2 border-accent text-accent font-mono font-bold text-lg hover:bg-accent/10 hover:shadow-lg hover:shadow-accent/20 transition-all duration-300 transform hover:-translate-y-1">
                 Let's Build Something Together →
               </Link>
             </motion.div>
