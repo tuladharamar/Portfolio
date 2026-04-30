@@ -11,11 +11,13 @@ import Contact from './Components/Body/Contact'
 import Projects from './Components/Body/Projects'
 import Error from './Components/Page/Error'
 import Certificate from './Components/Body/Certificate'
+import ScrollTop from './Components/Body/ScrollTop'
 
 function App() {
 
   return (
     <>
+      <ScrollTop />
       <Navbar />
       <Routes>
         <Route path='/' element={<Body />} />
@@ -23,10 +25,10 @@ function App() {
         <Route path="/skills" element={<Skills />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path='/certificate'element={<Certificate/>}/>
+        <Route path='/certificate' element={<Certificate />} />
         <Route path="*" element={<Error />} />
       </Routes>
-      <Footer /> 
+      <Footer />
 
     </>
   )
