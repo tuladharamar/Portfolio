@@ -16,7 +16,7 @@ const item = {
 
 const Certificate = () => {
     return (
-        <section className="bg-accent py-20 md:py-28 lg:py-32">
+        <section className="bg-accent py-20 md:py-28 lg:py-32 overflow-auto">
             <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12 md:mb-16 lg:mb-20">

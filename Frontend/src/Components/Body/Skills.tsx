@@ -3,7 +3,7 @@ import { motion } from "framer-motion"; // npm install framer-motion (optional b
 
 const Skills = () => {
   return (
-    <section className="bg-quad py-16 md:py-24 min-h-screen md:h-[calc(100vh-140px)]">
+    <section className="bg-quad py-16 md:py-24 min-h-screen md:h-[calc(100vh-140px)] overflow-auto">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header – more engaging like hero/about sections */}
         <div className="text-center mb-12 md:mb-16">

@@ -3,7 +3,7 @@ import IMG from '../../assets/Img_2.png'
 import { Link } from 'react-router-dom';
 const HeroSection = () => {
   return (
-    <section className="relative h-[calc(100vh-140px)] flex items-center bg-linear-to-br from-quad via-quad to-[#0a1f44] py-16 md:py-24 overflow-hidden">
+    <section className="relative h-[calc(100vh-140px)] flex items-center bg-linear-to-br from-quad via-quad to-[#0a1f44] py-16 md:py-24  overflow-auto">
 
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(255,193,7,0.08),transparent_40%)]" />

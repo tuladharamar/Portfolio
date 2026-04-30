@@ -82,7 +82,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="bg-quad py-20 min-h-screen">
+      className="bg-quad py-20 min-h-screen overflow-auto">
       <div className="max-w-3xl mx-auto px-6 lg:px-8">
 
         {/* HEADER */}
