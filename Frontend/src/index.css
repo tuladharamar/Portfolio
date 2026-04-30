@@ -23,3 +23,10 @@
 body{
   cursor:url('../src/assets/Cursor.png.png')
 }
+
+html.menu-open {
+  overflow: hidden;
+}
+html.menu-open body {
+  overflow: hidden;
+}

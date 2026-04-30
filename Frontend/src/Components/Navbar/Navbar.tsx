@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Navtitle from '../../Constant/Navtitle';
 import { IoMenu } from 'react-icons/io5';
 import { RxCross1 } from 'react-icons/rx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navVariants = {
@@ -43,6 +43,18 @@ const mobileMenuVariants = {
 
 const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    useEffect(() => {
+        if (mobileMenuOpen) {
+            document.documentElement.classList.add('menu-open');
+        } else {
+            document.documentElement.classList.remove('menu-open');
+        }
+
+        // Cleanup
+        return () => {
+            document.documentElement.classList.remove('menu-open');
+        };
+    }, [mobileMenuOpen]);
 
     const toggleMenu = () => setMobileMenuOpen((prev) => !prev);
     const closeMenu = () => setMobileMenuOpen(false);
@@ -111,7 +123,7 @@ const Navbar = () => {
             <AnimatePresence>
                 {mobileMenuOpen && (
                     <motion.div
-                        className="md:hidden fixed inset-0 bg-secondary backdrop-blur-sm z-40"
+                        className="md:hidden fixed inset-0 bg-secondary/95 backdrop-blur-sm z-40"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
