@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'; // npm install framer-motion
 import IMG from '../../assets/Img_2.png'
 import { Link } from 'react-router-dom';
-const HeroSection = () => {
+const Body = () => {
+  
   return (
     <section className="relative h-[calc(100vh-140px)] flex items-center bg-linear-to-br from-quad via-quad to-[#0a1f44] py-16 md:py-24  overflow-auto">
 
@@ -91,4 +92,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default Body;
