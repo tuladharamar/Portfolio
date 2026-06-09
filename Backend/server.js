@@ -52,7 +52,7 @@ app.post('/api/contact', async (req, res) => {
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <p>${String(message).replace(/\n/g, '<br>')}</p>
         <hr>
         <small>Sent at: ${new Date().toLocaleString()}</small>
       `
@@ -64,7 +64,7 @@ app.post('/api/contact', async (req, res) => {
     res.status(200).json({ message: 'Message sent successfully!' });
 
   } catch (error) {
-    console.error(' Email error:', error.message);
+    console.error(' FUll EMAIL ERROR:', error);
     res.status(500).json({ error: 'Failed to send message. Please try again later.' });
   }
 });
