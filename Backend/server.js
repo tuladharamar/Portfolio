@@ -3,14 +3,20 @@ const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const app = express();
-const PORT = process.env.PORT;
+
+const PORT = process.env.PORT || 5000;
 
 // ====================== MIDDLEWARE ======================
-app.use(express.json());
+app.use(express.json({ limit: '10kb' })); // Limit payload size
+
 app.use(cors({
   origin: (origin, callback) => {
-    const allowedOrigins = process.env.FRONTEND_URL;
-    if (!origin || allowedOrigins.includes(origin)) {
+    const allowedOrigins = process.env.FRONTEND_URL
+      ? process.env.FRONTEND_URL.split(',').map(o => o.trim())
+      : [];
+
+    // Allow requests with no origin (like mobile apps, Postman)
+    if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV === 'development') {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
@@ -18,19 +24,9 @@ app.use(cors({
   },
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  credentials: true,
+  maxAge: 86400 // 24 hours
 }));
-app.options(/.*/, (req, res) => {
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  return res.sendStatus(200);
-});
-
 
 // ====================== NODEMAILER TRANSPORTER ======================
 const transporter = nodemailer.createTransport({
@@ -38,28 +34,49 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
+  },
+  // Optional: better security & deliverability
+  tls: {
+    rejectUnauthorized: true
   }
 });
 
-// ====================== CONTACT ROUTE ======================
+// Test transporter on startup (optional but recommended)
+transporter.verify((error) => {
+  if (error) {
+    console.error('Transporter verification failed:', error);
+  } else {
+    console.log('Email transporter is ready ✅');
+  }
+});
+
+// ====================== ROUTES ======================
 app.get('/', (req, res) => {
-  res.send('Portfolio Contact API is running');
+  res.send('Portfolio Contact API is running 🚀');
 });
 
 app.post('/api/contact', async (req, res) => {
   const { name, email, phone, message } = req.body;
 
-  if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Name, email, and message are required fields.' });
+  // Basic validation
+  if (!name?.trim() || !email?.trim() || !message?.trim()) {
+    return res.status(400).json({
+      error: 'Name, email, and message are required fields.'
+    });
+  }
+
+  // Simple email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ error: 'Please provide a valid email address.' });
   }
 
   try {
-    const formattedPhone = phone ? phone : 'Not provided';
+    const formattedPhone = phone?.trim() ? phone.trim() : 'Not provided';
     const formattedMessage = message.replace(/\n/g, '<br>');
 
-    // 2. Send email
     const mailOptions = {
-      from: process.env.EMAIL_USER,
+      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
       replyTo: email,
       subject: `New Contact Form Message from ${name}`,
@@ -71,7 +88,7 @@ app.post('/api/contact', async (req, res) => {
         <p><strong>Message:</strong></p>
         <p>${formattedMessage}</p>
         <hr>
-        <small>Sent at: ${new Date().toLocaleString()}</small>
+        <small>Sent at: ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' })}</small>
       `
     };
 
@@ -79,19 +96,28 @@ app.post('/api/contact', async (req, res) => {
     console.log('Email sent successfully:', info.messageId);
 
     res.status(200).json({
+      success: true,
       message: 'Message sent successfully!'
     });
 
   } catch (error) {
     console.error('Contact form error:', error);
+
+    // More user-friendly error for common Gmail issues
+    let errorMsg = 'Failed to send message. Please try again later.';
+    if (error.code === 'EAUTH') {
+      errorMsg = 'Email authentication failed. Check your credentials.';
+    }
+
     res.status(500).json({
-      error: 'Failed to send message. Please try again later.'
+      success: false,
+      error: errorMsg
     });
   }
 });
 
 // ====================== SERVER START ======================
 app.listen(PORT, () => {
-  console.log(` Server running on http://localhost:${PORT}`);
-  console.log(`Frontend allowed: ${process.env.FRONTEND_URL}`);
+  console.log(`✅ Server running on http://localhost:${PORT}`);
+  console.log(`📧 Frontend allowed: ${process.env.FRONTEND_URL || 'All origins (dev)'}`);
 });
