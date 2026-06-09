@@ -65,7 +65,11 @@ app.post('/api/contact', async (req, res) => {
 
   } catch (error) {
     console.error(' FUll EMAIL ERROR:', error);
-    res.status(500).json({ error: 'Failed to send message. Please try again later.' });
+    res.status(500).json({
+      error: error.message,
+      code: error.code,
+      response: error.response
+    });
   }
 });
 
