@@ -39,11 +39,11 @@ const project = [
     },
        {
         id: 5,
-        title: "Note App",
+        title: "Collectible Garages",
         image: Todolist,
         content: "A clean and modern task management application built with React JS. Features include adding tasks, marking them as complete, deleting tasks, persistent storage using localStorage, and a beautiful responsive design with smooth animations.", tags: ["To-Do List"],
-        liveUrl: "",
-        githubUrl: "https://github.com/tuladharamar/Note-App"
+        liveUrl: "https://collectiblegarage.netlify.app",
+        githubUrl: "https://github.com/tuladharamar/CollectibleGarage"
     }
 ];
 
