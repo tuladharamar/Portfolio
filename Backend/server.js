@@ -22,11 +22,11 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS
   }
 });
-export const verifySMTP = async () => {
+const verifySMTP = async () => {
   await transporter.verify();
   console.log("SMTP WORKS");
 };
-
+module.exports = { verifySMTP };
 // ====================== CONTACT ROUTE ======================
 app.get('/', (req, res) => {
   res.send('API is running');
