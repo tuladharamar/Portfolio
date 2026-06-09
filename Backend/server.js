@@ -9,14 +9,7 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cors({
   origin: (origin, callback) => {
-    const allowedOrigins = [
-      process.env.FRONTEND_URL,           // e.g. https://yourportfolio.netlify.app
-      'http://localhost:3000',
-      'http://localhost:5173',            // Vite
-      'http://localhost:8080',
-      undefined                           // for some tools / Postman
-    ];
-
+    const allowedOrigins = process.env.FRONTEND_URL ;  
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -47,11 +40,12 @@ app.post('/api/contact', async (req, res) => {
   const { name, email, phone, message } = req.body;
 
   if (!name || !email || !message) {
-    return res.status(400).json({ error: 'All fields are required' });
+    return res.status(400).json({ error: 'Name, email, and message are required fields.' });
   }
 
   try {
-
+    const formattedPhone = phone ? phone : 'Not provided';
+    const formattedMessage = message.replace(/\n/g, '<br>');
 
     // 2. Send email
     const mailOptions = {
@@ -63,9 +57,9 @@ app.post('/api/contact', async (req, res) => {
         <h3>New message from your portfolio website</h3>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong>${phone}</p>
+        <p><strong>Phone:</strong> ${formattedPhone}</p>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <p>${formattedMessage}</p>
         <hr>
         <small>Sent at: ${new Date().toLocaleString()}</small>
       `
