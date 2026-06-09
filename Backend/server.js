@@ -9,7 +9,7 @@ const PORT = process.env.PORT;
 app.use(express.json());
 app.use(cors({
   origin: (origin, callback) => {
-    const allowedOrigins = process.env.FRONTEND_URL ;  
+    const allowedOrigins = process.env.FRONTEND_URL;
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -20,6 +20,16 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+app.options('*', (req, res) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  return res.sendStatus(200);
+});
 
 
 // ====================== NODEMAILER TRANSPORTER ======================
