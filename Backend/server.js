@@ -8,8 +8,23 @@ const PORT = process.env.PORT;
 // ====================== MIDDLEWARE ======================
 app.use(express.json());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "*",
-  methods: ['GET', 'POST', 'OPTIONS'],
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      process.env.FRONTEND_URL,           // e.g. https://yourportfolio.netlify.app
+      'http://localhost:3000',
+      'http://localhost:5173',            // Vite
+      'http://localhost:8080',
+      undefined                           // for some tools / Postman
+    ];
+
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
 
