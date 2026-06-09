@@ -23,11 +23,11 @@ app.use(cors({
       callback(new Error('Not allowed by CORS'));
     }
   },
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
-
+ app.options('*', cors());
 
 // ====================== NODEMAILER TRANSPORTER ======================
 const transporter = nodemailer.createTransport({
@@ -44,7 +44,7 @@ const verifySMTP = async () => {
 module.exports = { verifySMTP };
 // ====================== CONTACT ROUTE ======================
 app.get('/', (req, res) => {
-  res.send('API is running');
+  res.send('Portfolio Contact API is running');
 });
 
 app.post('/api/contact', async (req, res) => {
