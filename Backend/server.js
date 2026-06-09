@@ -37,11 +37,7 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS
   }
 });
-const verifySMTP = async () => {
-  await transporter.verify();
-  console.log("SMTP WORKS");
-};
-module.exports = { verifySMTP };
+
 // ====================== CONTACT ROUTE ======================
 app.get('/', (req, res) => {
   res.send('Portfolio Contact API is running');
