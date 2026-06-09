@@ -1,36 +1,29 @@
 require('dotenv').config();
 const express = require('express');
+// const mongoose = require('mongoose');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
+
+// const Contact = require('./models/Contact');
+
 const app = express();
 const PORT = process.env.PORT;
 
 // ====================== MIDDLEWARE ======================
 app.use(express.json());
 app.use(cors({
-  origin: (origin, callback) => {
-    const allowedOrigins = process.env.FRONTEND_URL;
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: process.env.FRONTEND_URL || "*",
   methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
-app.options(/.*/, (req, res) => {
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  return res.sendStatus(200);
-});
 
+// ====================== MONGO CONNECTION ======================
+// mongoose.connect(process.env.MONGO_URI)
+//   .then(() => console.log('✅ MongoDB connected'))
+//   .catch(err => {
+//     console.error('❌ MongoDB connection error:', err);
+//     process.exit(1);
+//   });
 
 // ====================== NODEMAILER TRANSPORTER ======================
 const transporter = nodemailer.createTransport({
@@ -43,19 +36,20 @@ const transporter = nodemailer.createTransport({
 
 // ====================== CONTACT ROUTE ======================
 app.get('/', (req, res) => {
-  res.send('Portfolio Contact API is running');
+  res.send('API is running');
 });
 
 app.post('/api/contact', async (req, res) => {
   const { name, email, phone, message } = req.body;
 
   if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Name, email, and message are required fields.' });
+    return res.status(400).json({ error: 'All fields are required' });
   }
 
   try {
-    const formattedPhone = phone ? phone : 'Not provided';
-    const formattedMessage = message.replace(/\n/g, '<br>');
+    // 1. Save to MongoDB
+    // const newContact = new Contact({ name, email, phone, message });
+    // await newContact.save();
 
     // 2. Send email
     const mailOptions = {
@@ -67,9 +61,9 @@ app.post('/api/contact', async (req, res) => {
         <h3>New message from your portfolio website</h3>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${formattedPhone}</p>
+        <p><strong>Phone:</strong>${phone}</p>
         <p><strong>Message:</strong></p>
-        <p>${formattedMessage}</p>
+        <p>${message.replace(/\n/g, '<br>')}</p>
         <hr>
         <small>Sent at: ${new Date().toLocaleString()}</small>
       `
@@ -78,6 +72,7 @@ app.post('/api/contact', async (req, res) => {
     const info = await transporter.sendMail(mailOptions);
     console.log('Email sent successfully:', info.messageId);
 
+    // 3. Return proper JSON (THIS WAS MISSING)
     res.status(200).json({
       message: 'Message sent successfully!'
     });
