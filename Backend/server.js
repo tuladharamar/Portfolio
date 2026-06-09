@@ -27,7 +27,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
- app.options('*', cors());
+
 
 // ====================== NODEMAILER TRANSPORTER ======================
 const transporter = nodemailer.createTransport({
