@@ -64,11 +64,14 @@ app.post('/api/contact', async (req, res) => {
     res.status(200).json({ message: 'Message sent successfully!' });
 
   } catch (error) {
-    console.error(' FUll EMAIL ERROR:', error);
+    console.error("===== EMAIL ERROR =====");
+    console.error(error);
+    console.error("=======================");
+
     res.status(500).json({
+      success: false,
       error: error.message,
-      code: error.code,
-      response: error.response
+      code: error.code
     });
   }
 });
