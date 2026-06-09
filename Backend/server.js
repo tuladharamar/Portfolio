@@ -27,6 +27,13 @@ const transporter = nodemailer.createTransport({
   greetingTimeout: 15000,
   socketTimeout: 15000,
 });
+transporter.verify((err, success) => {
+  if (err) {
+    console.error("SMTP VERIFY FAILED:", err);
+  } else {
+    console.log("SMTP READY");
+  }
+});
 
 // Routes
 app.get('/', (req, res) => res.send('API is running'));
