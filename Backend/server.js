@@ -1,11 +1,7 @@
 require('dotenv').config();
 const express = require('express');
-// const mongoose = require('mongoose');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
-
-// const Contact = require('./models/Contact');
-
 const app = express();
 const PORT = process.env.PORT;
 
@@ -17,13 +13,6 @@ app.use(cors({
   credentials: true
 }));
 
-// ====================== MONGO CONNECTION ======================
-// mongoose.connect(process.env.MONGO_URI)
-//   .then(() => console.log('✅ MongoDB connected'))
-//   .catch(err => {
-//     console.error('❌ MongoDB connection error:', err);
-//     process.exit(1);
-//   });
 
 // ====================== NODEMAILER TRANSPORTER ======================
 const transporter = nodemailer.createTransport({
@@ -33,6 +22,10 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS
   }
 });
+export const verifySMTP = async () => {
+  await transporter.verify();
+  console.log("SMTP WORKS");
+};
 
 // ====================== CONTACT ROUTE ======================
 app.get('/', (req, res) => {
@@ -47,9 +40,7 @@ app.post('/api/contact', async (req, res) => {
   }
 
   try {
-    // 1. Save to MongoDB
-    // const newContact = new Contact({ name, email, phone, message });
-    // await newContact.save();
+
 
     // 2. Send email
     const mailOptions = {
@@ -72,7 +63,6 @@ app.post('/api/contact', async (req, res) => {
     const info = await transporter.sendMail(mailOptions);
     console.log('Email sent successfully:', info.messageId);
 
-    // 3. Return proper JSON (THIS WAS MISSING)
     res.status(200).json({
       message: 'Message sent successfully!'
     });
@@ -87,6 +77,6 @@ app.post('/api/contact', async (req, res) => {
 
 // ====================== SERVER START ======================
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(` Server running on http://localhost:${PORT}`);
   console.log(`Frontend allowed: ${process.env.FRONTEND_URL}`);
 });
