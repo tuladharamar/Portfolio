@@ -2,6 +2,7 @@ import project_1 from "../assets/project_1.png";
 import Todolist from '../../src/assets/To-do-list.png';
 import DrumKit from '../../src/assets/Drum Kit.png';
 import Weather from '../assets/Weather.png';
+import CollectibleGarages from '../assets/CollectibleGarages.png';
 const project = [
     {
         id: 1, title: "Almaris Hotel",
@@ -40,10 +41,12 @@ const project = [
        {
         id: 5,
         title: "Collectible Garages",
-        image: Todolist,
-        content: "A clean and modern task management application built with React JS. Features include adding tasks, marking them as complete, deleting tasks, persistent storage using localStorage, and a beautiful responsive design with smooth animations.", tags: ["To-Do List"],
+        image: CollectibleGarages,
+        content: "A clean and modern task management application built with React JS. Features include adding tasks, marking them as complete, deleting tasks, persistent storage using localStorage, and a beautiful responsive design with smooth animations.", 
+        tags: ["Diecast store"],
         liveUrl: "https://collectiblegarage.netlify.app",
-        githubUrl: "https://github.com/tuladharamar/CollectibleGarage"
+        githubUrl: "https://github.com/tuladharamar/CollectibleGarage",
+        
     }
 ];
 
