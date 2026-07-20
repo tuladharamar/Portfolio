@@ -3,7 +3,8 @@ import Todolist from '../../src/assets/To-do-list.png';
 import DrumKit from '../../src/assets/Drum Kit.png';
 import Weather from '../assets/Weather.png';
 import CollectibleGarages from '../assets/CollectibleGarages.png';
-import ReactTo from '../assets/ReactTo.png'
+import ReactTo from '../assets/ReactTo.png';
+import Luminary from '../assets/Luminary.png';
 const project = [
     {
         id: 1, title: "Almaris Hotel",
@@ -57,6 +58,15 @@ const project = [
         tags:["ToDo-List"],
         liveUrl:"https://react-note-c6wj.vercel.app" ,
         githurl:"https://github.com/tuladharamar/ReactNote", 
+    }
+    {
+        id:7,
+        title:"Luminary",
+        image: Luminary,
+        content:"Luminary is a modern and responsive digital agency landing page designed to showcase a company's services, achievements, and client success stories. The project focuses on delivering a clean user interface, smooth animations, and an engaging user experience using modern frontend technologies.",
+        tags:["Luminary"],
+        liveUrl:"https://luminary-1ec8.vercel.app" ,
+        githurl:"https://github.com/tuladharamar/Luminary", 
     }
 ];
 
