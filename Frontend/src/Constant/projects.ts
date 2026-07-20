@@ -58,7 +58,7 @@ const project = [
         tags:["ToDo-List"],
         liveUrl:"https://react-note-c6wj.vercel.app" ,
         githurl:"https://github.com/tuladharamar/ReactNote", 
-    }
+    },
     {
         id:7,
         title:"Luminary",
