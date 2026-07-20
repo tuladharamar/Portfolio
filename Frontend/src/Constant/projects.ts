@@ -3,6 +3,7 @@ import Todolist from '../../src/assets/To-do-list.png';
 import DrumKit from '../../src/assets/Drum Kit.png';
 import Weather from '../assets/Weather.png';
 import CollectibleGarages from '../assets/CollectibleGarages.png';
+import ReactTo from '../assets/ReactTo.png'
 const project = [
     {
         id: 1, title: "Almaris Hotel",
@@ -47,6 +48,15 @@ const project = [
         liveUrl: "https://collectiblegarage.netlify.app",
         githubUrl: "https://github.com/tuladharamar/CollectibleGarage",
         
+    },
+    {
+        id:6,
+        title:"React-Todo List",
+        image: ReactTo,
+        content:"I built a modern Todo List application using React, TypeScript, and Tailwind CSS to strengthen my understanding of component-based development, state management, and responsive UI design.",
+        tags:["ToDo-List"],
+        liveUrl:"https://react-note-c6wj.vercel.app" ,
+        githurl:"https://github.com/tuladharamar/ReactNote", 
     }
 ];
 
