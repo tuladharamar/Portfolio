@@ -57,7 +57,7 @@ const project = [
         content:"I built a modern Todo List application using React, TypeScript, and Tailwind CSS to strengthen my understanding of component-based development, state management, and responsive UI design.",
         tags:["ToDo-List"],
         liveUrl:"https://react-note-c6wj.vercel.app" ,
-        githurl:"https://github.com/tuladharamar/ReactNote", 
+        githubUrl:"https://github.com/tuladharamar/ReactNote", 
     },
     {
         id:7,
@@ -66,7 +66,7 @@ const project = [
         content:"Luminary is a modern and responsive digital agency landing page designed to showcase a company's services, achievements, and client success stories. The project focuses on delivering a clean user interface, smooth animations, and an engaging user experience using modern frontend technologies.",
         tags:["Luminary"],
         liveUrl:"https://luminary-sooty.vercel.app" ,
-        githurl:"https://github.com/tuladharamar/Luminary", 
+        githubUrl:"https://github.com/tuladharamar/Luminary", 
     }
 ];
 
