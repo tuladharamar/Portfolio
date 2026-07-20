@@ -65,7 +65,7 @@ const project = [
         image: Luminary,
         content:"Luminary is a modern and responsive digital agency landing page designed to showcase a company's services, achievements, and client success stories. The project focuses on delivering a clean user interface, smooth animations, and an engaging user experience using modern frontend technologies.",
         tags:["Luminary"],
-        liveUrl:"https://luminary-bmh8.vercel.app" ,
+        liveUrl:"https://luminary-sooty.vercel.app" ,
         githurl:"https://github.com/tuladharamar/Luminary", 
     }
 ];
